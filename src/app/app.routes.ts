@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'home',
     title: 'Home',
     loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent) },
@@ -19,11 +24,6 @@ export const routes: Routes = [
     path: 'map',
     title: 'Map',
     loadComponent: () => import('./components/map/map.component').then(c => c.MapComponent)
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
   },
   {
     path: '**',

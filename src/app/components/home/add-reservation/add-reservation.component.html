@@ -1,0 +1,51 @@
+<form (submit)="createReservation()" [formGroup]="reservationForm">
+  <fieldset>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-3" id="newReservationModalLabel">New Reservation</h1>
+        <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+        <legend>Fill your data</legend>
+        <div class="mb-3">
+          <input type="text" id="nameInput" maxlength="50" class="form-control" placeholder="Name" formControlName="name" required
+                  [ngClass]="{'is-invalid': reservationForm.get('name')?.invalid && reservationForm.get('name')?.touched}">
+        </div>
+        <div class="mb-3">
+          <input type="email" id="emailInput" maxlength="255" class="form-control" placeholder="Email" formControlName="email" required
+                  [ngClass]="{'is-invalid': reservationForm.get('email')?.invalid && reservationForm.get('email')?.touched}">
+        </div>
+        <div class="mb-3">
+          <input type="number" id="phoneInput" maxlength="9" class="form-control" placeholder="Phone" formControlName="phone" required
+                  [ngClass]="{'is-invalid': reservationForm.get('phone')?.invalid && reservationForm.get('phone')?.touched}">
+        </div>
+        <div class="mb-3">
+          <select id="hotelSelect" class="form-select" formControlName="hotel" required
+                [ngClass]="{'is-invalid': reservationForm.get('hotel')?.invalid && reservationForm.get('hotel')?.touched}">
+            <option disabled selected value="">Select an hotel</option>
+            @for (hotel of hotels; track $index) {
+              <option [value]="hotel.id">{{ hotel.hotel_name }}</option>
+            }
+          </select>
+        </div>
+        <div class="mb-3">
+          <input type="date" id="checkInInput" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_in" required
+            [ngClass]="{'is-invalid': reservationForm.get('check_in')?.invalid && reservationForm.get('check_in')?.touched}">
+        </div>
+        <div class="mb-3">
+          <input type="date" id="checkOutInput" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_out" required
+            [ngClass]="{
+              'is-invalid': reservationForm.get('check_out')?.invalid && reservationForm.get('check_out')?.touched || reservationForm.hasError('check_inMinor')
+            }">
+          <div class="invalid-feedback">
+            Check out date can't be previous than the check in date
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Confirm</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

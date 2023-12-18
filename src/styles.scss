@@ -8,3 +8,10 @@ a {
   text-decoration: none !important;
   color: inherit !important;
 }
+
+/* Bootstrap Icons CSS Import */
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

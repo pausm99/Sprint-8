@@ -1,3 +1,58 @@
 <div class="container-xxl">
-  <p>home works!</p>
+  <section id="crud">
+    <hr class="mb-0">
+    <div class="table-responsive-xxl">
+      <table class="table table-hover" id="crud-table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Hotel</th>
+            <th scope="col">Chek in</th>
+            <th scope="col">Check out</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reservation of reservations; track $index) {
+            <tr>
+                <td >{{ reservation.guest_name }}</td>
+                <td>{{ reservation.email }}</td>
+                <td>{{ reservation.phone_number }}</td>
+                <td>{{ reservation.hotel_name }}</td>
+                <td>{{ reservation.check_in | date:'yyyy-MM-dd' }}</td>
+                <td>{{ reservation.check_out| date:'yyyy-MM-dd' }}</td>
+                <td>
+                  <div class="rowActions d-flex gap-lg-2">
+                    <button class="btn btn-warning" (click)="editReservation(reservation)">Edit</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Cancel</button>
+                    <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3 class="modal-title fs-5" id="deleteModalLabel">Cancel Reservation: {{ reservation.guest_name }}</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Please be aware that deleting this reservation is a permanent action, and the data cannot be restored. Confirm that you wish to proceed with the deletion?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteReservation(reservation.id!)">Cancel Reservation</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div id="tableActions" class="my-2">
+      <button type="button" class="btn btn-primary" (click)="createReservation()">Make a reservation</button>
+    </div>
+  </section>
 </div>
