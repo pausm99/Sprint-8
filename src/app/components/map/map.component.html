@@ -1,3 +1,10 @@
-<div class="container-xxl">
-  <p>map works!</p>
+<div class="container-xxl position-relative" id="map-wrapper">
+  <div #mapDiv class="map-container position-absolute"></div>
+  <div id="markers-legend">
+    <ul class="list-group">
+      @for (hotelMarker of hotelMarkers; track $index) {
+        <li class="list-group-item" (click)="flyToMarker(hotelMarker.marker)">{{ hotelMarker.hotel.hotel_name }}</li>
+      }
+    </ul>
+  </div>
 </div>

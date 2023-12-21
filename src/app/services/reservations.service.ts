@@ -24,6 +24,7 @@ export class ReservationsService {
 
   updateReservation(body: Reservation): Observable<any> {
     const id = body.id;
+    console.log(body);
     return this.http.patch<Reservation>(`http://localhost:3000/reservations/${id}`, body);
   }
 

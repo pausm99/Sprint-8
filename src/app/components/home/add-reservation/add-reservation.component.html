@@ -29,11 +29,11 @@
           </select>
         </div>
         <div class="mb-3">
-          <input type="date" id="checkInInput" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_in" required
+          <input type="datetime-local" id="checkInInput" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_in" required
             [ngClass]="{'is-invalid': reservationForm.get('check_in')?.invalid && reservationForm.get('check_in')?.touched}">
         </div>
         <div class="mb-3">
-          <input type="date" id="checkOutInput" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_out" required
+          <input type="datetime-local" id="checkOutInput" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_out" required
             [ngClass]="{
               'is-invalid': reservationForm.get('check_out')?.invalid && reservationForm.get('check_out')?.touched || reservationForm.hasError('check_inMinor')
             }">

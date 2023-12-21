@@ -15,9 +15,19 @@ export class CustomValidators extends Validators {
     return (regex.test(control.value) ? null : { invalidPhone: true });
   }
 
-  static chechDates: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  static checkInDates: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const check_in = control.get('check_in')?.value;
     const check_out = control.get('check_out')?.value;
+
+    if (check_in !== '' && check_out !== '' && check_in > check_out) {
+      return { 'check_inMinor': true };
+    }
+    return null;
+  }
+
+  static eventDates: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const check_in = control.get('start')?.value;
+    const check_out = control.get('end')?.value;
 
     if (check_in !== '' && check_out !== '' && check_in > check_out) {
       return { 'check_inMinor': true };

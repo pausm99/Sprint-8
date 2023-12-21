@@ -1,0 +1,52 @@
+@if (event?.id) {
+  <form (submit)="editEvent()" [formGroup]="eventForm">
+    <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="editEventModalLabel">Edit Event</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="activeModal.dismiss()" aria-label="Close"></button>
+    </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Title" id="editEventTitleInput" formControlName="title" required
+          [ngClass]="{'is-invalid': eventForm.get('title')?.invalid && eventForm.get('title')?.touched}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="editEventStartInput">Start</label>
+          <input type="datetime-local" id="editEventStartInput" class="form-control" formControlName="start" required
+          [ngClass]="{'is-invalid': eventForm.get('start')?.invalid && eventForm.get('start')?.touched}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="editEventEndInput">End</label>
+          <input type="datetime-local" id="editEventEndInput" class="form-control" formControlName="end" required
+          [ngClass]="{'is-invalid': eventForm.get('end')?.invalid && eventForm.get('end')?.touched}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="deleteEvent()">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" [disabled]="eventForm.invalid" class="btn btn-primary">Edit</button>
+      </div>
+    </div>
+  </form>
+} @else {
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="editEventModalLabel">Hotel Reservation</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="activeModal.dismiss()" aria-label="Close"></button>
+    </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <i>{{ event?.title }}</i>
+        </div>
+        <div class="mb-3">
+          <strong>Check in: </strong>{{ event?.start | date: 'medium' }}
+        </div>
+        <div class="mb-3">
+          <strong>Check out: </strong>{{ event?.end | date: 'medium' }}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+}

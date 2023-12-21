@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Hotel } from '../interfaces/hotel';
+import { Temperature } from '../interfaces/temperature';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HotelsService {
+export class WeatherService {
 
   constructor(private http: HttpClient) { }
 
-  getHotels(): Observable<Hotel[]> {
-    return this.http.get<Hotel[]>('http://localhost:3000/hotels');
+  getTemperatures(): Observable<Temperature[]> {
+    return this.http.get<Temperature[]>('http://localhost:3000/graphics');
   }
 }

@@ -9,6 +9,30 @@ a {
   color: inherit !important;
 }
 
+.mapboxgl-popup {
+  max-width: 150px;
+  text-align: center;
+
+  .mapboxgl-popup-content {
+    border-radius: 8px;
+    position: relative;
+
+    .mapboxgl-popup-close-button {
+      position: absolute;
+      right: 5px;
+      padding: 2px;
+    }
+
+    .mapboxgl-popup-close-button:hover {
+      background-color: transparent
+    }
+  }
+}
+
+.fc-event{
+  cursor: pointer !important;
+}
+
 /* Bootstrap Icons CSS Import */
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 

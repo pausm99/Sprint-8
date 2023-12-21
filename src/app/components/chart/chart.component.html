@@ -1,3 +1,10 @@
 <div class="container-xxl">
-  <p>chart works!</p>
+  <div class="d-flex justify-content-center align-items-center gap-3 py-2 mb-4">
+    <button (click)="scrollTo('chart1')" class="btn btn-secondary">Hotels chart</button>
+    <button (click)="scrollTo('chart2')" class="btn btn-secondary">Chicago's temperature</button>
+  </div>
+  <div class="d-flex flex-column justify-content-center align-items-center gap-5" id="charts-wrapper">
+    <canvas id="chart1" class="chart"></canvas>
+    <canvas id="chart2" class="chart"></canvas>
+  </div>
 </div>

@@ -26,13 +26,11 @@ export class HomeComponent {
   constructor(private reservationsService: ReservationsService, private hotelsService: HotelsService, config: NgbModalConfig) {
     this.reservationsService.getReservations().subscribe(
       (response) => {
-        console.log(response);
         this.reservations = response;
       }
     );
     this.hotelsService.getHotels().subscribe(
       (response) => {
-        console.log(response);
         this.hotels = response;
       }
     );
@@ -56,6 +54,7 @@ export class HomeComponent {
       const modalref = this.modalService.open(AddReservationComponent);
       modalref.componentInstance.hotels = this.hotels;
       modalref.closed.subscribe((reservationCreated: Reservation) => {
+        console.log(reservationCreated);
         this.reservations.push(reservationCreated);
       });
     }
@@ -63,7 +62,6 @@ export class HomeComponent {
   }
 
   editReservation(reservation: Reservation) {
-    console.log(reservation);
     if (this.hotels.length > 0) {
       const modalRef = this.modalService.open(EditReservationComponent);
       modalRef.componentInstance.reservation = reservation;

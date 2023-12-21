@@ -23,16 +23,16 @@
           <select id="hotelSelect" class="form-select" formControlName="hotel_name" required
                 [ngClass]="{'is-invalid': reservationForm.get('hotel_name')?.invalid && reservationForm.get('hotel_name')?.touched}">
             @for (hotel of hotels; track $index) {
-              <option>{{ hotel.hotel_name }}</option>
+              <option [selected]="hotel.hotel_name === reservation?.hotel_name">{{ hotel.hotel_name }}</option>
             }
           </select>
         </div>
         <div class="mb-3">
-          <input type="date" id="checkInInputEdit" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_in" required
+          <input type="datetime-local" id="checkInInputEdit" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_in" required
             [ngClass]="{'is-invalid': reservationForm.get('check_in')?.invalid && reservationForm.get('check_in')?.touched}">
         </div>
         <div class="mb-3">
-          <input type="date" id="checkOutInputEdit" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_out" required
+          <input type="datetime-local" id="checkOutInputEdit" class="form-control" placeholder="yyyy-mm-dd" formControlName="check_out" required
             [ngClass]="{'is-invalid': reservationForm.get('check_out')?.invalid && reservationForm.get('check_out')?.touched || reservationForm.hasError('check_inMinor')}">
             <div class="invalid-feedback">
               Check out date can't be previous than the check in date

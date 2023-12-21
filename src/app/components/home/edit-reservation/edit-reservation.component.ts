@@ -37,7 +37,7 @@ export class EditReservationComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillForm();
-    this.reservationForm.setValidators(CustomValidators.chechDates);
+    this.reservationForm.setValidators(CustomValidators.checkInDates);
   }
 
   fillForm(): void {
@@ -62,7 +62,7 @@ export class EditReservationComponent implements OnInit {
         guest_name: formValues.guest_name!,
         email: formValues.email!,
         phone_number: formValues.phone_number!,
-        hotel_id: this.getHotelID(formValues.hotel_name), //BUSCAR PEL NOM
+        hotel_id: this.getHotelID(formValues.hotel_name),
         hotel_name: formValues.hotel_name,
         check_in: formValues.check_in!,
         check_out: formValues.check_out!
@@ -80,7 +80,7 @@ export class EditReservationComponent implements OnInit {
   }
 
   getFormattedDate(date: string): string {
-    return date.split('T')[0]!;
+    return date.split('.')[0]!;
   }
 
   getHotelID(name: string): number {

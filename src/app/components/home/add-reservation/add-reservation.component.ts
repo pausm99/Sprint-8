@@ -33,7 +33,7 @@ export class AddReservationComponent implements OnInit{
   constructor(private reservationsService: ReservationsService) {}
 
   ngOnInit(): void {
-    this.reservationForm.setValidators(CustomValidators.chechDates);
+    this.reservationForm.setValidators(CustomValidators.checkInDates);
   }
 
   createReservation() {
@@ -53,8 +53,9 @@ export class AddReservationComponent implements OnInit{
 
       this.reservationsService.createReservation(reservation).subscribe(
         {
-          next: () => {
-            this.activeModal.close(reservation);
+          next: (createdReservation: Reservation) => {
+            createdReservation.hotel_name = reservation.hotel_name;
+            this.activeModal.close(createdReservation);
           },
           error: (err) => console.log(err)
         }

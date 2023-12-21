@@ -1,3 +1,44 @@
 <div class="container-xxl">
-  <p>calendar works!</p>
+  <div class="calendar-wrapper d-flex flex-column gap-2">
+    <div id="calendar"></div>
+    <div id="add-event-div">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEventModal" id="add-event-button">+</button>
+      <!-- Modal -->
+      <div class="modal fade" id="addEventModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="addEventModalLabel">New Event</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form (submit)="createEvent()" [formGroup]="eventForm">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Title" id="eventTitleInput" formControlName="title" required
+                  [ngClass]="{'is-invalid': eventForm.get('title')?.invalid && eventForm.get('title')?.touched}">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="eventEndInput">Start</label>
+                  <input type="datetime-local" id="eventEndInput" class="form-control" formControlName="start" required
+                  [ngClass]="{'is-invalid': eventForm.get('start')?.invalid && eventForm.get('start')?.touched}">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="eventEndInput">End</label>
+                  <input type="datetime-local" id="eventEndInput" class="form-control" formControlName="end" required
+                  [ngClass]="{'is-invalid': eventForm.get('end')?.invalid && eventForm.get('end')?.touched || eventForm.hasError('check_inMinor')}">
+                  <div class="invalid-feedback">
+                    End date can't be previous than the check in date
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" [disabled]="eventForm.invalid" class="btn btn-primary" data-bs-dismiss="modal">ADD</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
