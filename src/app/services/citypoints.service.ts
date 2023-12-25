@@ -1,0 +1,16 @@
+import { Citypoint } from './../interfaces/citypoint';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CitypointsService {
+
+  constructor(private http: HttpClient) { }
+
+  getCityPoints(): Observable<Citypoint[]> {
+    return this.http.get<Citypoint[]>('http://localhost:3000/citypoints');
+  }
+}

@@ -1,10 +1,33 @@
 <div class="container-xxl position-relative" id="map-wrapper">
   <div #mapDiv class="map-container position-absolute"></div>
-  <div id="markers-legend">
-    <ul class="list-group">
-      @for (hotelMarker of hotelMarkers; track $index) {
-        <li class="list-group-item" (click)="flyToMarker(hotelMarker.marker)">{{ hotelMarker.hotel.hotel_name }}</li>
-      }
-    </ul>
+  <div id="legend" class="d-flex flex-column align-items-end gap-2">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Hotels list</button>
+      <div id="hotels-legend">
+        <ul class="dropdown-menu">
+          @for (hotelMarker of hotelMarkers; track $index) {
+            <li class="dropdown-item" (click)="flyToMarker(hotelMarker.marker)">{{ hotelMarker.hotel.hotel_name }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Points of interest</button>
+      <div id="points-legend">
+        <form>
+          <ul class="dropdown-menu">
+            @for (category of categories; track $index) {
+              <li class="dropdown-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [id]="category+'-input'" checked (change)="handleLayer(category)">
+                  <label class="form-check-label" [for]="category+'-input'">{{ category }}</label>
+                </div>
+              </li>
+            }
+          </ul>
+        </form>
+      </div>
+    </div>
+    <button class="btn btn-light" (click)="centerMap()"><i class="bi bi-crosshair"></i></button>
   </div>
 </div>

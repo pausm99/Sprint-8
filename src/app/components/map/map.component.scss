@@ -1,5 +1,6 @@
 #map-wrapper {
   height: 100%;
+  position: relative;
 
   .map-container {
     position: fixed;
@@ -9,14 +10,16 @@
     height: 90vh;
   }
 
-  #markers-legend {
+  #legend {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
 
-    ul {
-      li {
-        cursor: pointer;
+    #hotels-legend {
+      ul {
+        li {
+          cursor: pointer;
+        }
       }
     }
   }
