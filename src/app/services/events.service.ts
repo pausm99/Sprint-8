@@ -22,4 +22,9 @@ export class EventsService {
   deleteEvent(id: number): Observable<any>{
     return this.http.delete<CalendarEvent>(`http://localhost:3000/events/${id}`);
   }
+
+  updateEvent(body: CalendarEvent): Observable<CalendarEvent> {
+    const id = body.id;
+    return this.http.patch<CalendarEvent>(`http://localhost:3000/events/${id}`, body);
+  }
 }

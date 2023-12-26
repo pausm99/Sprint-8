@@ -20,11 +20,16 @@
           <input type="datetime-local" id="editEventEndInput" class="form-control" formControlName="end" required
           [ngClass]="{'is-invalid': eventForm.get('end')?.invalid && eventForm.get('end')?.touched}">
         </div>
+        <div class="mb-3">
+          <label class="form-label" for="editEventColorInput">Color</label>
+          <input type="color" id="editEventColorInput" class="form-control" formControlName="color" required
+          [ngClass]="{'is-invalid': eventForm.get('color')?.invalid && eventForm.get('color')?.touched}">
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="deleteEvent()">Delete</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" [disabled]="eventForm.invalid" class="btn btn-primary">Edit</button>
+        <button type="submit" [disabled]="eventForm.invalid || !formChanged" class="btn btn-primary">Edit</button>
       </div>
     </div>
   </form>

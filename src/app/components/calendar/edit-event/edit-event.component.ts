@@ -24,6 +24,7 @@ export class EditEventComponent implements OnInit {
     title: new FormControl('', [Validators.required]),
     start: new FormControl('', [Validators.required]),
     end: new FormControl('', [Validators.required]),
+    color: new FormControl('', [Validators.required])
   });
 
   constructor(private eventsService: EventsService) {}
@@ -40,6 +41,7 @@ export class EditEventComponent implements OnInit {
     const check_inFormattedDate = this.getFormattedDate(this.event?.start!);
     const check_outFormattedDate = this.getFormattedDate(this.event?.end!);
 
+
     this.eventForm.patchValue({
       start: check_inFormattedDate,
       end: check_outFormattedDate,
@@ -52,24 +54,24 @@ export class EditEventComponent implements OnInit {
   }
 
   editEvent() {
-    // console.log(this.event);
-    // const formValues = this.eventForm.value;
+    const formValues = this.eventForm.value;
 
-    // const editedEvent: CalendarEvent = {
-    //   title: formValues.title!,
-    //   start: this.getFormattedDate(formValues.start!),
-    //   end: this.getFormattedDate(formValues.end!)
-    // }
-    // if (this.formChanged) {
-    //   this.eventsService.(editedEvent).subscribe(
-    //     {
-    //       next: () => {
-    //         this.activeModal.close(editedEvent);
-    //       },
-    //       error: (err) => console.log(err)
-    //     }
-    //   );
-    // }else this.activeModal.close();
+    const editedEvent: CalendarEvent = {
+      id: Number(this.event?.id),
+      title: formValues.title!,
+      start: this.getFormattedDate(formValues.start!),
+      end: this.getFormattedDate(formValues.end!),
+      color: formValues.color!
+    }
+    if (this.formChanged) {
+      this.eventsService.updateEvent(editedEvent).subscribe(
+        {
+          next: () => {
+            this.activeModal.close({reason: 'edited', eventUpdated: editedEvent});
+          },
+        }
+      );
+    } else this.activeModal.close();
   }
 
   deleteEvent() {

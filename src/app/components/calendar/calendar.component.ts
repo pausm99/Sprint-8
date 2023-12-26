@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { CustomValidators } from '../../validators/custom.validator';
+import { color } from 'd3';
 
 
 @Component({
@@ -51,10 +52,12 @@ export class CalendarComponent implements OnInit {
     title: new FormControl('', [Validators.required]),
     start: new FormControl('', [Validators.required]),
     end: new FormControl('', [Validators.required]),
+    color: new FormControl('', [Validators.required])
   });
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
+    editable: true,
     locale: esLocale,
     themeSystem: 'bootstrap5',
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin],
@@ -97,15 +100,12 @@ export class CalendarComponent implements OnInit {
         title: formValues.title!,
         start: formValues.start!,
         end: formValues.end!,
+        color: formValues.color!
       }
-
       this.eventsService.createEvent(event).subscribe({
         next: (eventCreated) => {
           this.events = [...this.events, eventCreated];
           this.calendar?.addEvent(eventCreated);
-          // const aaa = eventCreated as EventInput;
-          // aaa.color = 'red';
-          // this.calendar?.addEvent(aaa);
         }
       });
     }
@@ -113,8 +113,8 @@ export class CalendarComponent implements OnInit {
 
   openEventModal(info: EventClickArg): void {
     const modalref = this.modalService.open(EditEventComponent);
-    const { title, start, end, id } = info.event;
-    modalref.componentInstance.event = { title: title, start: start, end: end, id: id };
+    const { title, start, end, id, backgroundColor } = info.event;
+    modalref.componentInstance.event = { title: title, start: start, end: end, id: id, color: backgroundColor };
     modalref.closed.subscribe((result) => {
       if (result.reason === 'deleted') {
         const id = result.id;
@@ -124,6 +124,12 @@ export class CalendarComponent implements OnInit {
         }
         const event = this.calendar?.getEventById(id);
         event?.remove();
+      }
+      else if (result.reason === 'edited') {
+        const event: CalendarEvent = result.eventUpdated;
+        const indexToUpdate = this.events.findIndex(e => e.id == event.id);
+        if (indexToUpdate !== -1) this.events[indexToUpdate] = { ...this.events[indexToUpdate], ...result.eventUpdated };
+        this.initCalendar();
       }
     });
   }

@@ -30,6 +30,11 @@
                     End date can't be previous than the check in date
                   </div>
                 </div>
+                <div class="mb-3">
+                  <label class="form-label" for="eventColorInput">Color</label>
+                  <input type="color" id="eventColorInput" value="#ff1000" class="form-control" formControlName="color" required
+                  [ngClass]="{'is-invalid': eventForm.get('color')?.invalid && eventForm.get('color')?.touched}">
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
