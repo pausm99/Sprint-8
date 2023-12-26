@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { CustomValidators } from '../../validators/custom.validator';
-import { color } from 'd3';
 
 
 @Component({
@@ -58,7 +57,6 @@ export class CalendarComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     editable: true,
-    locale: esLocale,
     themeSystem: 'bootstrap5',
     plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin, bootstrap5Plugin],
     droppable: true,

@@ -1,6 +1,5 @@
 <div class="container-xxl">
-  <section id="crud">
-    <hr class="mb-0">
+  <section id="crud" class="pb-2">
     <div class="table-responsive-xxl">
       <table class="table table-hover" id="crud-table">
         <thead>
@@ -21,10 +20,10 @@
                 <td>{{ reservation.email }}</td>
                 <td>{{ reservation.phone_number }}</td>
                 <td>{{ reservation.hotel_name }}</td>
-                <td>{{ reservation.check_in | date:'yyyy-MM-dd' }}</td>
-                <td>{{ reservation.check_out| date:'yyyy-MM-dd' }}</td>
+                <td class="table-dates">{{ reservation.check_in | date:'yyyy-MM-dd' }}</td>
+                <td class="table-dates">{{ reservation.check_out| date:'yyyy-MM-dd' }}</td>
                 <td>
-                  <div class="rowActions d-flex gap-lg-2">
+                  <div class="rowActions d-flex gap-2 gap-lg-3">
                     <button class="btn btn-warning" (click)="editReservation(reservation)">Edit</button>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Cancel</button>
                     <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
