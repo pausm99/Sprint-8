@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="eventColorInput">Color</label>
-                  <input type="color" id="eventColorInput" value="#ff1000" class="form-control" formControlName="color" required
+                  <input type="color" id="eventColorInput" class="form-control" formControlName="color" required
                   [ngClass]="{'is-invalid': eventForm.get('color')?.invalid && eventForm.get('color')?.touched}">
                 </div>
               </div>

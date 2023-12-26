@@ -104,6 +104,7 @@ export class CalendarComponent implements OnInit {
         next: (eventCreated) => {
           this.events = [...this.events, eventCreated];
           this.calendar?.addEvent(eventCreated);
+          this.eventForm.reset();
         }
       });
     }
@@ -122,6 +123,7 @@ export class CalendarComponent implements OnInit {
         }
         const event = this.calendar?.getEventById(id);
         event?.remove();
+        this.eventForm.reset();
       }
       else if (result.reason === 'edited') {
         const event: CalendarEvent = result.eventUpdated;

@@ -67,6 +67,7 @@ export class EditEventComponent implements OnInit {
       this.eventsService.updateEvent(editedEvent).subscribe(
         {
           next: () => {
+            this.eventForm.reset();
             this.activeModal.close({reason: 'edited', eventUpdated: editedEvent});
           },
         }
